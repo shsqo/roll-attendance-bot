@@ -1,0 +1,17 @@
+services:
+  - type: worker
+    name: roll-attendance-bot
+    runtime: python
+    buildCommand: pip install -r requirements.txt
+    startCommand: python bot.py
+    envVars:
+      - key: DISCORD_TOKEN
+        sync: false
+      - key: DISCORD_CHANNEL_ID
+        sync: false
+      - key: DB_PATH
+        value: /var/data/attendance.sqlite3
+    disk:
+      name: attendance-data
+      mountPath: /var/data
+      sizeGB: 1
